@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 
 
-class ServerStartError(Exception):
+# Fail to start the server
+class ServerStartError(RuntimeError):
 	pass
 
 
-class IllegalCall(Exception):
+# The function call is illegal due to some reasons
+class IllegalCall(RuntimeError):
+	pass
+
+
+# The server has stopped, operation is illegal
+class ServerStopped(IllegalCall):
 	pass

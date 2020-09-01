@@ -80,17 +80,19 @@ def on_user_info(server, info):
 is_server_running: {}
 is_server_startup: {}
 is_rcon_running: {}
+pid: {}
 		'''.strip().format(
 			server.is_server_running(),
 			server.is_server_startup(),
 			server.is_rcon_running(),
+			server.get_server_pid(),
 		))
 
 	if info.content == '!!!secret':
 		global secret
 		server.reply(info, 'My secret number is {}\nAnd You know it too {}'.format(
 			secret, server.get_plugin_instance('sample_plugin').secret)
-		)
+					 )
 
 	if info.content == '!!!plugin':
 		name = server.get_plugin_list()[0]
@@ -158,7 +160,15 @@ def on_info(server, info):
 		server.reply(info, 'The server bound port {}'.format(info.content.split(':')[-1]))
 
 
+'''
+# It works too but not it's not recommend to use
 def on_player_joined(server, player):
+	server.tell(player, 'Welcome!')
+	server.say('Hi {}'.format(player))
+'''
+
+
+def on_player_joined(server, player, info):
 	server.tell(player, 'Welcome!')
 	server.say('Hi {}'.format(player))
 
